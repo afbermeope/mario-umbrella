@@ -1,1 +1,217 @@
-aqui vamos a hacer la locura de mario
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resident Evil Card</title>
+  <style>
+    /* Reset básico */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: 'Arial', sans-serif; background: #000; }
+
+    /* Video de fondo */
+    .bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      filter: brightness(0.35) contrast(1.2);
+    }
+
+    /* Capa oscura para estilo cinematográfico */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(0,0,0,0.3), rgba(0,0,0,0.85));
+      z-index: -1;
+    }
+
+    /* Contenedor principal */
+    .container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    /* Tarjeta estilo Resident Evil */
+    .re-card {
+      width: 100%;
+      max-width: 380px;
+      background: linear-gradient(180deg, #1a1a1a, #050505);
+      border: 2px solid #8b0000;
+      border-radius: 14px;
+      box-shadow: 0 0 25px rgba(139,0,0,0.6), inset 0 0 30px rgba(0,0,0,0.9);
+      overflow: hidden;
+      animation: flicker 6s infinite;
+    }
+
+    /* Marco superior tipo pantalla */
+    .re-frame {
+      position: relative;
+      background: #000;
+      border-bottom: 2px solid #8b0000;
+      height: 55vh; /* Prioriza formato vertical */
+      max-height: 420px;
+    }
+
+    .re-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Clave para video vertical */
+      object-position: center;
+      filter: saturate(0.8) contrast(1.1);
+    }
+
+    /* Efecto scanlines */
+    .re-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.03),
+        rgba(255,255,255,0.03) 1px,
+        rgba(0,0,0,0) 2px,
+        rgba(0,0,0,0) 4px
+      );
+      pointer-events: none;
+    }
+
+    /* Datos de la persona */
+    .re-info {
+      padding: 1rem 1.2rem 1.4rem;
+      color: #e0e0e0;
+    }
+
+    .re-info h1 {
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.3rem;
+      color: #ff2a2a;
+    }
+
+    .re-info h2 {
+      font-size: 0.85rem;
+      font-weight: normal;
+      opacity: 0.85;
+      margin-bottom: 0.8rem;
+    }
+
+    .re-info p {
+      font-size: 0.75rem;
+      line-height: 1.4;
+      opacity: 0.9;
+    }
+
+    .re-footer {
+      margin-top: 0.8rem;
+      padding-top: 0.6rem;
+      border-top: 1px solid rgba(139,0,0,0.5);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      opacity: 0.85;
+    }
+
+    /* Animación sutil */
+    @keyframes flicker {
+      0%, 100% { box-shadow: 0 0 20px rgba(139,0,0,0.6); }
+      50% { box-shadow: 0 0 30px rgba(139,0,0,0.9); }
+    }
+
+    /* Responsive mobile-first */
+    @media (max-width: 480px) {
+      .re-frame {
+        height: 65vh; /* Más protagonismo en celular */
+        max-height: none;
+      }
+      .container {
+        padding: 1rem;
+      }
+
+      .re-info {
+        padding: 0.9rem 1rem 1.1rem;
+      }
+
+      .re-info h1 {
+        font-size: 1rem;
+      }
+
+      .re-info h2 {
+        font-size: 0.75rem;
+      }
+
+      .re-info p {
+        font-size: 0.7rem;
+      }
+
+      .re-footer {
+        flex-direction: column;
+        gap: 0.3rem;
+        font-size: 0.65rem;
+      }
+    }
+
+    /* Tablets y pantallas grandes */
+    @media (min-width: 768px) {
+      .re-card {
+        max-width: 420px;
+      }
+    }
+      50% { box-shadow: 0 0 35px rgba(139,0,0,0.9); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video de fondo (usa tu propio archivo) -->
+  <video class="bg-video" autoplay muted loop>
+    <source src="video-fondo.mp4" type="video/mp4" />
+  </video>
+  <div class="overlay"></div>
+
+  <div class="container">
+    <div class="re-card">
+
+      <!-- Marco tipo Resident Evil -->
+      <div class="re-frame">
+        <video autoplay muted loop>
+          <source src="assets/mario.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <!-- Información -->
+      <div class="re-info">
+        <h1>MARIO ANDRÉS LARA</h1>
+        <h2>Científico · Umbrella Corporation</h2>
+        <p>
+          Especialista en investigación de nuevas patologías biológicas.
+          Proyecto activo clasificado: <strong>VIRUS T</strong>.
+        </p>
+
+        <div class="re-footer">
+          <span>12/03/1980</span>
+          <span>UMB R&D Division</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // JS opcional: control de reproducción o efectos futuros
+    // Ejemplo: pausar video al hacer click en la tarjeta
+    const card = document.querySelector('.re-card');
+    const frameVideo = document.querySelector('.re-frame video');
+
+    card.addEventListener('click', () => {
+      if (frameVideo.paused) frameVideo.play();
+      else frameVideo.pause();
+    });
+  </script>
+
+</body>
+</html>
